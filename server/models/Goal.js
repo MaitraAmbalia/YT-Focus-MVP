@@ -22,19 +22,17 @@ const goalSchema = mongoose.Schema({
     isCurrent: { type: Boolean, default: false },
     notes: { type: String, default: "" },
     
-    // Existing Quiz Field
     quiz: [{
       question: String,
       options: [String],
       correctAnswer: String
     }],
 
-    // --- ADD THIS NEW FIELD ---
     flashcards: [{
       front: String,
       back: String
     }]
-    // --------------------------
+    
   }]
 }, {
   timestamps: true
