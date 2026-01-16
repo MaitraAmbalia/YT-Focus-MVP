@@ -5,8 +5,7 @@ const userSchema = mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   avatar: { type: String },
-  
-  // ✅ ADDED: Bio field for profile
+
   bio: { type: String, default: "" },
 
   xp: { type: Number, default: 0 },
@@ -15,7 +14,6 @@ const userSchema = mongoose.Schema({
   streak: { type: Number, default: 0 },
   lastStudyDate: { type: Date },
 
-  // Github-style contribution graph data
   activityLog: [{
     date: { type: String }, 
     count: { type: Number, default: 0 } 
@@ -27,13 +25,12 @@ const userSchema = mongoose.Schema({
     quizzesPassed: { type: Number, default: 0 }
   },
 
-  // ✅ ADDED: Certificates array
   certificates: [{
     courseId: String,
     courseTitle: String,
     thumbnail: String,
     issuedAt: { type: Date, default: Date.now },
-    imageUrl: String // Stores the Base64 image data
+    imageUrl: String 
   }]
 }, {
   timestamps: true
