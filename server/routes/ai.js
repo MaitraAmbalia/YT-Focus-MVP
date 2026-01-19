@@ -4,13 +4,12 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 const router = express.Router();
-// Helper function to extract JSON array from text
+
 const cleanAndParseJSON = (text) => {
   try {
-    // 1. Remove markdown code blocks (e.g., ```json ... ```)
+
     let cleanText = text.replace(/```\w*\n?/g, '').replace(/```/g, '').trim();
     
-    // 2. Find the first '[' and last ']' to extract the array
     const firstBracket = cleanText.indexOf('[');
     const lastBracket = cleanText.lastIndexOf(']');
     
@@ -25,9 +24,6 @@ const cleanAndParseJSON = (text) => {
   }
 };
 
-// ==========================================
-// 1. QUIZ GENERATION
-// ==========================================
 router.post('/quiz', async (req, res) => {
   const { videoTitle, description } = req.body;
   
@@ -40,7 +36,6 @@ router.post('/quiz', async (req, res) => {
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     
-    // ✅ CHANGED MODEL TO 'gemini-pro' (Most Stable)
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
 
     const prompt = `
@@ -83,9 +78,6 @@ router.post('/quiz', async (req, res) => {
   }
 });
 
-// ==========================================
-// 2. FLASHCARD GENERATION
-// ==========================================
 router.post('/flashcards', async (req, res) => {
   const { videoTitle, description } = req.body;
 
@@ -98,7 +90,7 @@ router.post('/flashcards', async (req, res) => {
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     
-    // ✅ CHANGED MODEL TO 'gemini-pro' (Most Stable)
+
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
 
     const prompt = `
